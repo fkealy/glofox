@@ -1,0 +1,9 @@
+DROP TABLE IF EXISTS GYM_CLASS;
+
+CREATE TABLE GYM_CLASS (
+  id INT AUTO_INCREMENT  PRIMARY KEY,
+  class_name VARCHAR(250) NOT NULL,
+  start_date datetime NOT NULL,
+  end_date datetime DEFAULT NULL,
+  capacity INT
+);
