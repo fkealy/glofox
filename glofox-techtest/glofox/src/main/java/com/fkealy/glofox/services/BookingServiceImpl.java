@@ -26,19 +26,9 @@ public class BookingServiceImpl implements BookingService {
     @Override
     public void bookClass(Booking request) throws BookingServiceException {
         String targetDate = formatDayValue(request.getDate());
-
-        Optional<GymClass> gymClass = StreamSupport
-                .stream(gymClassRepository
-                        .findAll()
-                        .spliterator(),false)
-                .filter(g ->
-                        formatDayValue(g.getDate())
-                        .equals(targetDate)).findFirst();
-
+        Optional<GymClass> gymClass = searchRepositoryForClassesOnDate(targetDate);
         if(gymClass.isPresent()){
-            GymClass updatedClass = gymClass.get();
-            updatedClass.setCapacity(updatedClass.getCapacity() - 1);
-            gymClassRepository.save(updatedClass);
+            gymClassRepository.save(reduceCapacityByOne(gymClass.get()));
         } else {
             throw new BookingServiceException("no class found on that day");
         }
@@ -46,5 +36,19 @@ public class BookingServiceImpl implements BookingService {
 
     private String formatDayValue(LocalDateTime date) {
         return fmt.format(Date.from(date.atZone(ZoneId.systemDefault()).toInstant()));
+    }
+
+    private Optional<GymClass> searchRepositoryForClassesOnDate(String date){
+        Iterable<GymClass> gymClasses = gymClassRepository.findAll();
+        return StreamSupport
+                .stream( gymClasses.spliterator(),false)
+                .filter(g ->
+                        formatDayValue(g.getDate())
+                                .equals(date)).findFirst();
+    }
+
+    private GymClass reduceCapacityByOne(GymClass gymClass){
+        gymClass.setCapacity(gymClass.getCapacity() - 1);
+        return gymClass;
     }
 }

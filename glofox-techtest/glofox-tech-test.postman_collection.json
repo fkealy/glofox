@@ -1,0 +1,68 @@
+{
+	"info": {
+		"_postman_id": "05795554-06a3-4aa0-bb93-5cbe3d21f084",
+		"name": "glofox-tech-test",
+		"description": "2 working api calls for testing\n\n/classes\n\nadds classes to the in-memory db for all days from start date up to and including end date.\n\n/bookings\n\nchecks to see if there is a class on the day booked and reduces the capacity of that gym class if so.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "localhost:8080/classes",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"yoga\",\n\t\"startDate\":\"2020-02-18T14:39:24.013\",\n\t\"endDate\":\"2020-02-21T14:39:24.013\",\n\t\"capacity\":\"20\"\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/classes",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"classes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/bookings",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\":\"Jonny Wilkinson\",\n\t\"date\": \"2020-02-18T14:39:24.013\"\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/bookings",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"bookings"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

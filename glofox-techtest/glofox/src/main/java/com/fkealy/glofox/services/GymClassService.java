@@ -5,5 +5,5 @@ import com.fkealy.glofox.model.GymClassSeries;
 
 public interface GymClassService {
 
-    void saveGymClass(GymClassSeries gymClass) throws GymClassServiceValidationException;
+    void saveGymClass(GymClassSeries gymClassSeries) throws GymClassServiceValidationException;
 }
