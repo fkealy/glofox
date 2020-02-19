@@ -15,7 +15,6 @@ public class GymClassController {
     @Autowired
     GymClassServiceImpl gymClassService;
 
-    //idempotent PUT chosen to prevent multiple gym classes being created by accident.
     @RequestMapping(value = "/classes", method = RequestMethod.POST)
     public @ResponseBody
     ResponseEntity<GymClassSeries> addClass(@RequestBody GymClassSeries request) throws GymClassServiceValidationException {

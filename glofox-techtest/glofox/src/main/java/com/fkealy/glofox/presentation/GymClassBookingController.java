@@ -19,7 +19,6 @@ public class GymClassBookingController {
     @Autowired
     BookingService bookingService;
 
-    //idempotent PUT chosen to prevent multiple gym classes being created by accident.
     @RequestMapping(value = "/bookings", method = RequestMethod.PUT)
     public @ResponseBody
     ResponseEntity<GymClassSeries> bookClass(@RequestBody Booking request) throws BookingServiceException {
